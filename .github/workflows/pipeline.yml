@@ -20,7 +20,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout do Repositório
+      - name: Checkout do Repositorio
         uses: actions/checkout@v4
 
       - name: Build da Imagem Docker
@@ -42,14 +42,14 @@ jobs:
           terraform plan -no-color -out=tfplan.bin
           terraform show -no-color tfplan.bin > tfplan.txt
 
-      - name: Revisão do Plano pela IA (GitHub Models)
+      - name: Revisao do Plano pela IA (GitHub Models)
         if: github.event_name == 'pull_request'
         working-directory: ./infra
         run: |
           PLAN_TEXT=$(cat tfplan.txt | head -c 10000)
 
           PAYLOAD=$(jq -n \
-            --arg sys "Você é um Arquiteto DevSecOps Sênior. Analise este terraform plan de forma objetiva em 3 tópicos: 1) Segurança (portas expostas, privilégios); 2) Mudanças destrutivas; 3) Veredito (Aprovado ou Atenção)." \
+            --arg sys "Voce e um Arquiteto DevSecOps Senior. Analise este terraform plan de forma objetiva em 3 topicos: 1) Seguranca (portas expostas, privilegios); 2) Mudancas destrutivas; 3) Veredito (Aprovado ou Atencao)." \
             --arg usr "$PLAN_TEXT" \
             '{
               model: "gpt-4o",

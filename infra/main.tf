@@ -20,6 +20,6 @@ resource "docker_container" "api_container" {
 
   ports {
     internal = 8000
-    external = 8080
+    external = 9090
   }
 }
