@@ -16,3 +16,10 @@ def status():
     return {
         "data_hora": datetime.now().isoformat()
     }
+
+@app.get("/versao")
+def versao():
+    return {
+        "versao": "1.1.0",
+        "status": "ok"
+    }
